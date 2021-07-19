@@ -1,0 +1,62 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "airbnb-typescript",
+    "prettier"
+    // "prettier/@typescript-eslint"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2019,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "settings": {
+    "react": {
+      "version": "latest"
+    }
+  },
+  "rules": {
+    "linebreak-style": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "camelcase": "off",
+    "@typescript-eslint/camelcase": "off",
+    "no-shadow": "off",
+    "@typescript-eslint/no-use-before-define": "warn",
+    "no-plusplus": "off",
+    "no-restricted-syntax": "off",
+    "consistent-return": "warn",
+    "no-console": "warn",
+    "@typescript-eslint/no-empty-interface": "warn",
+    "no-param-reassign": ["warn", { "props": false }],
+    "one-var": "off",
+    "prefer-destructuring": [
+      "error",
+      {
+        "array": false,
+        "object": true
+      },
+      {
+        "enforceForRenamedProperties": false
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/*.test.ts"]
+      }
+    ],
+    "no-underscore-dangle": "off",
+    "no-debugger": "warn"
+  }
+}

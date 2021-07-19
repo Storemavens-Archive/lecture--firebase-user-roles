@@ -1,0 +1,10 @@
+{
+  "watch": ["src"],
+  "ignore": ["**/*.test.js", "**/*.spec.js", ".git", "node_modules"],
+  "exec": "ts-node src/index.ts",
+  "ext": "js,json,ts",
+  "events": {
+    "start": "echo \"linting...\" && npm run lint -s && echo \"lint complete!\"",
+    "restart": "echo \"\\x1Bc\""
+  }
+}
