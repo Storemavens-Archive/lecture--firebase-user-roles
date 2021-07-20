@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --config nodemon_dev.json",
+    "firebase-emulator": "firebase emulators:start",
     "build": "rm -rf ./dist && tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
