@@ -7,8 +7,7 @@ admin.initializeApp({
   credential: admin.credential.cert(config.firebase.serviceAccount),
 });
 
+export const dbTimestamp = admin.firestore.FieldValue.serverTimestamp;
+
 export const db = admin.firestore();
 export const auth = admin.auth();
-
-
-
