@@ -12,4 +12,29 @@ routes.get("/", (req, res) => {
 });
 
 routes.use(authMiddleware);
+
+// This DOES go through auth middleware
+
+routes.get("/stories", async (req, res) => {
+  try {
+    const stories = await getStories();
+    res.json({ stories });
+  } catch (error) {
+    res.json({ error });
+  }
+});
+
+routes.post("/stories", async (req, res) => {
+  try {
+    const { story } = req.body;
+    logger.debug(story, "req.body");
+    // res.locals.userId comes from auth middleWare
+    const newStory = await createStory(res.locals.userId, story);
+
+    res.json({ story: newStory });
+  } catch (error) {
+    res.json({ error });
+  }
+});
+
 export default routes;
