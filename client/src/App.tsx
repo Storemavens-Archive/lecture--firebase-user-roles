@@ -3,6 +3,7 @@ import "./App.css";
 import { useAuth } from "./auth/auth.state";
 import SignIn from "./auth/SignIn.component";
 import SignOut from "./auth/SignOut.component";
+import NewStory from "./NewStory.component";
 import { FirebaseUser } from "./vendor/firebase";
 
 const SignedInView = ({ user }: { user: FirebaseUser }) => {
@@ -11,6 +12,7 @@ const SignedInView = ({ user }: { user: FirebaseUser }) => {
       <h1>Signed in as: {user?.displayName}</h1>
       <SignOut />
       <pre>{JSON.stringify(user?.toJSON(), null, 2)}</pre>
+      <NewStory userId={user?.email} />
     </div>
   );
 };
@@ -23,6 +25,7 @@ const NotSignedInView = () => {
     </div>
   );
 };
+
 function App() {
   const { isSignedIn, user } = useAuth();
   return (
