@@ -2,6 +2,8 @@
 
 ## Get Started
 
+See branches to for a step-by-step guide
+
 ### Setup Firebase
 
 Make sure you installed Java
@@ -17,10 +19,12 @@ Build cloud functions for them to work in emulator mode.
 Deploy Cloud Functions:  
 `$ functions:: npm run deploy`
 
-
 ### Scripts
 
 `npm run start`  
 `npm run firebase-emulator`  
-`npm build`  
+`npm build`
 
+### Client
+
+`$ client:: npm run start`
