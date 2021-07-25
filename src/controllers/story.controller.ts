@@ -3,9 +3,32 @@ import { db, dbTimestamp } from "../vendor/firebase.vendor";
 const STORIES_COLLECTION = "stories";
 const USERS_COLLECTION = "users";
 
-export const getStories = async () => {
+export const getAllStories = async () => {
   const storiesRef = db.collection(STORIES_COLLECTION);
   return storiesRef.listDocuments();
+};
+
+export const getStory = async (storyId: string, userId: string) => {
+  if (!storyId || !userId) {
+    throw new Error(`No storyId or userId provided '${storyId}'`);
+  }
+  const storiesRef = db.collection(STORIES_COLLECTION).doc(storyId);
+  const doc = await storiesRef.get();
+  if (!doc.exists) {
+    throw new Error(`Story '${storyId}' does not exist`);
+  }
+  const story = doc.data() as StoryModel;
+
+  const { roles } = story;
+  if (
+    ![...roles.StoryEditor, ...roles.StoryReader, roles.StoryOwner].includes(
+      userId
+    )
+  ) {
+    throw new Error(`forbidden`);
+  }
+
+  return story;
 };
 
 export const createStory = async (userId: string, story: StoryModel) => {

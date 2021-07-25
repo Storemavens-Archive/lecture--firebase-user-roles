@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import "./App.css";
-import { useAuth } from "./auth/auth.state";
 import { fetchWithAuth } from "./auth/auth.utils";
 
 interface Props {

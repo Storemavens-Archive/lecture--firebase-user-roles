@@ -1,7 +1,12 @@
 import { Router } from "express";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import authMiddleware from "./auth.middleware";
 import config from "./config";
-import { createStory, getStories } from "./controllers/story.controller";
+import {
+  createStory,
+  getAllStories,
+  getStory,
+} from "./controllers/story.controller";
 import logger from "./utils/logger";
 
 const routes = Router();
@@ -17,10 +22,26 @@ routes.use(authMiddleware);
 
 routes.get("/stories", async (req, res) => {
   try {
-    const stories = await getStories();
+    const stories = await getAllStories();
     res.json({ stories });
   } catch (error) {
-    res.json({ error });
+    res.json({ error: error.message });
+  }
+});
+
+routes.get("/stories/:storyId", async (req, res) => {
+  try {
+    const { storyId } = req.params;
+    const story = await getStory(storyId, res.locals.userId);
+    res.json({ story });
+  } catch (error) {
+    if (error.message === "forbidden") {
+      res
+        .status(StatusCodes.FORBIDDEN)
+        .json({ message: ReasonPhrases.FORBIDDEN });
+    } else {
+      res.json({ error: error.message });
+    }
   }
 });
 
@@ -33,7 +54,7 @@ routes.post("/stories", async (req, res) => {
 
     res.json({ story: newStory });
   } catch (error) {
-    res.json({ error });
+    res.json({ error: error.message });
   }
 });
 
